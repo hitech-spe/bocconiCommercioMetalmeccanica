@@ -1,12 +1,14 @@
 import { Component, AfterViewInit, ElementRef, OnDestroy } from '@angular/core';
 import { TranslateModule } from "@ngx-translate/core";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.scss'],
   imports: [
-    TranslateModule
+    TranslateModule,
+    RouterLink
   ],
   standalone: true
 })

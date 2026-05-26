@@ -5,19 +5,8 @@
         aria-label="Torna in cima"
 ></button>
 
-<section id="home" class="hero reveal-on-scroll is-visible">
-    <div class="hero-overlay"></div>
-    <div class="hero-container">
-        <div class="hero-content fade-in">
-        <span class="hero-kicker">{{ 'HOME.HERO.KICKER' | translate }}</span>
-        <h1>{{ 'HOME.HERO.TITLE' | translate }} <span class="text-gradient">{{ 'HOME.HERO.SUBTITLE' | translate }}</span></h1>
-        <p>{{ 'HOME.HERO.DESC' | translate }}</p>
-        <div class="cta">
-            <a [routerLink]="['/home']" fragment="services" class="btn btn-primary">{{ 'HOME.HERO.CTA_SERVICES' | translate }}</a>
-            <a [routerLink]="['/home']" fragment="contact" class="btn btn-outline">{{ 'HOME.HERO.CTA_CONTACT' | translate }}</a>
-        </div>
-    </div>
-    </div>
+<section id="home" class="home-section reveal-on-scroll is-visible">
+    <app-about></app-about>
 </section>
 
 <section class="features reveal-on-scroll">
@@ -55,9 +44,6 @@
     </div>
 </section>
 
-<section id="about" class="home-section reveal-on-scroll">
-    <app-about></app-about>
-</section>
 
 <section id="services" class="home-section">
     <div class="section-container">

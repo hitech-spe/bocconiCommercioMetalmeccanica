@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, HostListener, OnDestroy, inject } from '@angular/core';
 import {TranslateModule} from "@ngx-translate/core";
-import {RouterLink, RouterOutlet} from "@angular/router";
+import {RouterOutlet} from "@angular/router";
 import {AboutComponent} from "../about/about.component";
 import {ServicesComponent} from "../services/services.component";
 import {ContactComponent} from "../contact/contact.component";
@@ -11,7 +11,6 @@ import {ContactComponent} from "../contact/contact.component";
   styleUrls: ['./home.component.scss'],
     imports: [
         TranslateModule,
-        RouterLink,
         AboutComponent,
         ServicesComponent,
         ContactComponent,

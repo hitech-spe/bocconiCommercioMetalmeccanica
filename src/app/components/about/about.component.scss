@@ -1,7 +1,11 @@
 .about {
   position: relative;
-  padding: 14rem 2rem;
-  text-align: center;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
   width: 100%;
   box-sizing: border-box;
@@ -22,7 +26,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: rgba(15, 23, 42, 0.45);
+    background: rgba(15, 23, 42, 0.6); // Aumentata l'opacità per migliorare la leggibilità dei pulsanti
     z-index: 1;
   }
 
@@ -36,37 +40,58 @@
      LOGICA DI ANIMAZIONE SEQUENZIALE
   ========================================= */
 
-  /* 1. STATO INIZIALE: Titolo e Card partono trasparenti e spostati in basso */
-  .section-title,
-  .about-card,
-  .mission-card {
+  .cta {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    margin-top: auto; // Spinge verso il basso
+    margin-bottom: 15vh; // Distanza dal fondo per posizionarli "più sotto"
+
+    .btn-primary {
+      background-color: var(--primary);
+      border-color: var(--primary);
+      color: white;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); // Aggiunta ombra per profondità
+      
+      &:hover {
+        background-color: var(--primary-dark, #1d4ed8);
+        transform: translateY(-2px);
+      }
+    }
+
+    .btn-outline {
+      border-color: rgba(255, 255, 255, 0.3);
+      color: white;
+
+      &:hover {
+        border-color: white;
+        background: white;
+        color: var(--primary);
+      }
+    }
+
+    @media (max-width: 680px) {
+      width: 100%;
+      flex-direction: column;
+      align-items: stretch;
+      padding: 0 1rem;
+      margin-bottom: 10vh; // Ridotto leggermente su mobile
+
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
   }
 
-  /* 2. STATO VISIBILE: Quando l'Observer aggiunge la classe .is-visible */
   &.is-visible {
-
-    .section-title {
+    .cta {
       opacity: 1;
       transform: translateY(0);
-      /* Aspetta quasi mezzo secondo per far ammirare l'immagine di sfondo */
-      transition-delay: 0.4s;
-    }
-
-    .about-card {
-      opacity: 1;
-      transform: translateY(0);
-      /* La prima sezione esce nettamente dopo il titolo */
       transition-delay: 0.6s;
-    }
-
-    .mission-card {
-      opacity: 1;
-      transform: translateY(0);
-      /* La seconda sezione aspetta che la prima sia quasi a posto prima di uscire */
-      transition-delay: 1.0s;
     }
   }
 
