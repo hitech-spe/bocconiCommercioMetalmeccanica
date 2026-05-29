@@ -1,17 +1,22 @@
 <section class="about scroll-reveal">
+    <div class="about-container">
+        <!--div class="about-header">
+            <h2 class="section-title">
+                <span class="text-gradient">BOCCONI COMMERCIO</span>
+                Eccellenza nel Soccorso e Servizi
+            </h2>
+        </div-->
 
-    <!--div class="about-grid">
-        <div class="glass-card about-card main-text">
-            <p>{{ 'ABOUT.P1' | translate }}</p>
-            <p>{{ 'ABOUT.P2' | translate }}</p>
+        <div class="about-content">
+            <!--div class="about-card main-text">
+                <p>{{ 'ABOUT.P1' | translate }}</p>
+                <p>{{ 'ABOUT.P2' | translate }}</p>
+            </div-->
+            
+            <div class="cta">
+                <a [routerLink]="['/home']" fragment="services" class="btn btn-primary">{{ 'HOME.HERO.CTA_SERVICES' | translate }}</a>
+                <a [routerLink]="['/home']" fragment="contact" class="btn btn-outline">{{ 'HOME.HERO.CTA_CONTACT' | translate }}</a>
+            </div>
         </div>
-
-        <div class="glass-card mission-card">
-            <p>{{ 'ABOUT.MISSION_DESC' | translate }}</p>
-        </div>
-    </div-->
-    <div class="cta">
-        <a [routerLink]="['/home']" fragment="services" class="btn btn-primary">{{ 'HOME.HERO.CTA_SERVICES' | translate }}</a>
-        <a [routerLink]="['/home']" fragment="contact" class="btn btn-outline">{{ 'HOME.HERO.CTA_CONTACT' | translate }}</a>
     </div>
 </section>

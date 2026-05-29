@@ -5,17 +5,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* TRUCCO GLASSMORPHISM: Sfondo scuro semi-trasparente */
-  background: rgba(15, 23, 42, 0.7);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   position: fixed;
   width: 100%;
   top: 0;
   left: 0;
   z-index: 1000;
-  //border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Bordo molto sottile */
-  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.5rem 0;
   transition: all 0.3s ease;
 
   .logo {
@@ -63,30 +62,30 @@
       align-items: center;
 
       li a {
-        /* Testo dei link chiaro per contrastare col fondo scuro */
         color: #e2e8f0;
         text-decoration: none;
         padding: 0.5rem 0;
-        font-weight: 500;
-        font-size: 0.85rem;
+        font-weight: 600;
+        font-size: 0.8rem;
         text-transform: uppercase;
-        letter-spacing: 0.1em;
+        letter-spacing: 0.12em;
         position: relative;
-        transition: color 0.3s ease;
+        transition: all 0.3s ease;
 
         &::after {
           content: '';
           position: absolute;
           bottom: 0;
-          left: 0;
+          left: 50%;
           width: 0;
-          height: 1px;
-          background: #00d2ff; /* Linea azzurra hover */
-          transition: width 0.3s ease;
+          height: 2px;
+          background: var(--accent);
+          transition: all 0.3s ease;
+          transform: translateX(-50%);
         }
 
-        &:hover, /*&.active*/ {
-          color: #00d2ff; /* Testo azzurro hover/active */
+        &:hover, &.active {
+          color: white;
           background: none;
 
           &::after {
