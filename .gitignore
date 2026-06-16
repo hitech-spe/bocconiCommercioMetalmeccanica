@@ -31,3 +31,4 @@ yarn-error.log*
 *.css
 *.css.map
 /.idea/watcherTasks.xml
+/.idea/inspectionProfiles/Project_Default.xml
