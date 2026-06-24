@@ -1,6 +1,6 @@
 .about {
   position: relative;
-  padding: 8rem 2rem;
+  padding: 0 2rem;
   min-height: 100vh;
   display: flex;
   align-items: flex-end;
@@ -54,6 +54,7 @@
     max-width: 1200px;
     width: 100%;
     text-align: center;
+    padding-top: 100px; // Aggiunto padding-top per l'header fisso
     padding-bottom: 5vh; // Spazio dal fondo
     display: flex;
     flex-direction: column;
@@ -245,6 +246,19 @@
 @media (max-width: 768px) {
   .about {
     padding: 6rem 1.5rem;
+    min-height: auto;
+    align-items: center;
+
+    &::before {
+      background-attachment: scroll;
+      background-position: center center;
+    }
+
+    .about-container {
+      padding-top: 80px;
+      padding-bottom: 2rem;
+      gap: 2.5rem;
+    }
 
     .about-card {
       padding: 2rem 1.5rem;
@@ -255,11 +269,21 @@
       gap: 1.5rem;
     }
 
+    .feature-card {
+      padding: 2rem 1.5rem;
+
+      h3 {
+        font-size: 1rem;
+      }
+    }
+
     .cta {
       flex-direction: column;
-      
+      gap: 1rem;
+
       .btn {
         width: 100%;
+        min-width: unset;
       }
     }
   }
