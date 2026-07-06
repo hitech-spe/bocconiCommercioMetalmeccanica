@@ -70,17 +70,35 @@ export class ServiceDetailComponent implements OnInit, OnDestroy {
     },
     {
       id: 'noleggio',
-      title: 'Noleggio Auto - Furgoni - Gru - Escavatori',
+      title: 'Noleggio Auto, Furgoni e Mezzi da Lavoro',
       icon: '🔑',
-      description: 'Noleggio auto, furgoni 9 posti, gru, piattaforme aeree, escavatori e muletti.',
-      features: ['Auto e furgoni', 'Gru e piattaforme aeree', 'Escavatori e macchine movimento terra', 'Muletti'],
-      fullContent: 'Ampia flotta a noleggio per soddisfare le esigenze di privati e aziende: auto, veicoli commerciali, mezzi di sollevamento e macchine operatrici.',
+      description: 'Soluzioni di mobilità flessibili e noleggio di auto, furgoni (anche 9 posti), gru, piattaforme aeree, escavatori e muletti per privati e aziende.',
+      features: [
+        'City Car / Utilitarie: Fiat Panda, Toyota Yaris. Perfette per la città, consumi bassi. Assicurazione e soccorso inclusi.',
+        'SUV e Station Wagon: Jeep Renegade, Fiat 500X, Skoda Octavia. Comfort e spazio per la famiglia.',
+        'Furgoni Merci e 9 Posti: Doblò, Ducato, Transit. Da 3 a 12mq, anche con gancio traino, ribaltabile e versioni passeggeri.',
+        'Furgoni Frigo e Speciali: Per catering, fioristi e trasporti specifici. Preventivo personalizzato.',
+        'Gru e Piattaforme Aeree: Mezzi di sollevamento per lavori in quota e cantieristica.',
+        'Escavatori e Macchine Movimento Terra: Mezzi operativi professionali per ogni tipo di scavo.',
+        'Muletti: Soluzioni per la logistica e la movimentazione merci in magazzino.',
+        'Noleggio Lungo Termine (12-60 mesi): Tutto incluso (bollo, assicurazione, manutenzione, gomme) a canone fisso.'
+      ],
+      fullContent: 'Ampia flotta di mezzi recenti e sicuri per soddisfare le esigenze di privati e aziende. Che ti serva una piccola auto per la città, un furgone per il tuo lavoro o mezzi di sollevamento e macchine operatrici, offriamo formule dal breve al lungo termine con pacchetti tutto incluso per eliminare ogni pensiero.',
       translations: {
         en: {
-          title: 'Car - Van - Crane - Excavator Rental',
-          description: 'Rental of cars, 9-seater vans, cranes, aerial platforms, excavators and forklifts.',
-          features: ['Cars and vans', 'Cranes and aerial platforms', 'Excavators and earthmoving machinery', 'Forklifts'],
-          fullContent: 'Large rental fleet to meet the needs of individuals and companies: cars, commercial vehicles, lifting equipment and operating machines.'
+          title: 'Car, Van and Work Equipment Rental',
+          description: 'Flexible mobility solutions and rental of cars, vans (including 9-seaters), cranes, aerial platforms, excavators, and forklifts for individuals and companies.',
+          features: [
+            'City Cars / Hatchbacks: Fiat Panda, Toyota Yaris. Perfect for the city, low consumption. Insurance and recovery included.',
+            'SUVs & Station Wagons: Jeep Renegade, Fiat 500X, Skoda Octavia. Comfort and space for the family.',
+            'Cargo & 9-Seater Vans: Doblò, Ducato, Transit. From 3 to 12sqm, also with tow hook, tipper, and passenger versions.',
+            'Fridge & Special Vans: For catering, florists, and specific transports. Personalized quote.',
+            'Cranes and Aerial Platforms: Lifting equipment for high-altitude work and construction sites.',
+            'Excavators and Earthmoving Machinery: Professional operating vehicles for any type of excavation.',
+            'Forklifts: Solutions for logistics and goods handling in the warehouse.',
+            'Long Term Rental (12-60 months): All-inclusive (tax, insurance, maintenance, tires) at a fixed rate.'
+          ],
+          fullContent: 'Large rental fleet of recent and safe vehicles to meet the needs of individuals and companies. Whether you need a small car for the city, a van for your work, or lifting equipment and operating machines, we offer short to long-term formulas with all-inclusive packages to eliminate all worries.'
         }
       }
     }
