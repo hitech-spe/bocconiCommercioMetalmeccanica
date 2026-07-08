@@ -1,6 +1,8 @@
-import { Component, AfterViewInit, ElementRef, OnDestroy } from '@angular/core';
-import { TranslateModule } from "@ngx-translate/core";
+import { Component, AfterViewInit, ElementRef, OnDestroy, inject, OnInit } from '@angular/core';
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import {RouterLink} from "@angular/router";
+import {Title, Meta} from "@angular/platform-browser";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-about',
@@ -12,11 +14,29 @@ import {RouterLink} from "@angular/router";
   ],
   standalone: true
 })
-export class AboutComponent implements AfterViewInit, OnDestroy {
+export class AboutComponent implements AfterViewInit, OnInit, OnDestroy {
+  private translate = inject(TranslateService);
+  private titleService = inject(Title);
+  private metaService = inject(Meta);
+  private langSub?: Subscription;
   private observer: IntersectionObserver | null = null;
 
   // Iniettiamo ElementRef per cercare elementi solo dentro questo componente
   constructor(private el: ElementRef) {}
+
+  ngOnInit(): void {
+    this.updateSEO();
+    this.langSub = this.translate.onLangChange.subscribe(() => {
+      this.updateSEO();
+    });
+  }
+
+  private updateSEO(): void {
+    this.translate.get(['SEO.ABOUT_TITLE', 'SEO.ABOUT_DESC']).subscribe(res => {
+      this.titleService.setTitle(res['SEO.ABOUT_TITLE']);
+      this.metaService.updateTag({ name: 'description', content: res['SEO.ABOUT_DESC'] });
+    });
+  }
 
   ngAfterViewInit() {
     // Configuriamo l'Observer

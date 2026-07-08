@@ -212,5 +212,23 @@
     "ERROR_REQUIRED_FIELDS": "Nome e cognome sono obbligatori",
     "ERROR_GENERIC": "Si è verificato un errore. Riprova.",
     "SUCCESS_REGISTER": "Account creato con successo! Ora puoi accedere."
+  },
+  "SEO": {
+    "HOME_TITLE": "BOCCONI COMMERCIO e METALMECCANICA SRL | Soccorso, Lavaggio & Noleggio Veicoli",
+    "HOME_DESC": "BOCCONI COMMERCIO e METALMECCANICA SRL a Massafra: leader nei servizi professionali di soccorso stradale 24/7, lavaggio industriale e noleggio mezzi di lavoro.",
+    "ABOUT_TITLE": "Chi Siamo | BOCCONI COMMERCIO e METALMECCANICA SRL",
+    "ABOUT_DESC": "Scopri la nostra storia, la missione e l'esperienza di BOCCONI COMMERCIO e METALMECCANICA SRL nei servizi automobilistici e industriali a Massafra.",
+    "SERVICES_TITLE": "I Nostri Servizi | BOCCONI COMMERCIO e METALMECCANICA SRL",
+    "SERVICES_DESC": "Catalogo completo dei nostri servizi: soccorso stradale rapido, lavaggio veicoli industriali e noleggio attrezzature da lavoro.",
+    "CONTACT_TITLE": "Contatti | BOCCONI COMMERCIO e METALMECCANICA SRL",
+    "CONTACT_DESC": "Mettiti in contatto con BOCCONI COMMERCIO e METALMECCANICA SRL a Massafra per richiedere preventivi, assistenza o informazioni sui nostri servizi.",
+    "LOGIN_TITLE": "Accedi | BOCCONI COMMERCIO e METALMECCANICA SRL",
+    "LOGIN_DESC": "Accedi al portale clienti di BOCCONI COMMERCIO e METALMECCANICA SRL per gestire le tue prenotazioni e richieste.",
+    "ANNOUNCEMENTS_TITLE": "Catalogo Annunci | BOCCONI COMMERCIO e METALMECCANICA SRL",
+    "ANNOUNCEMENTS_DESC": "Sfoglia gli annunci di vendita e noleggio di veicoli commerciali, industriali e attrezzature di lavoro disponibili presso BOCCONI COMMERCIO e METALMECCANICA SRL.",
+    "PRIVACY_TITLE": "Informativa sulla Privacy | BOCCONI COMMERCIO e METALMECCANICA SRL",
+    "PRIVACY_DESC": "Informativa sul trattamento dei dati personali (GDPR) e sulla privacy degli utenti di BOCCONI COMMERCIO e METALMECCANICA SRL.",
+    "TERMS_TITLE": "Termini e Condizioni | BOCCONI COMMERCIO e METALMECCANICA SRL",
+    "TERMS_DESC": "Termini e condizioni generali d'uso del portale BOCCONI COMMERCIO e METALMECCANICA SRL e regolamentazione delle simulazioni di preventivi AI."
   }
 }

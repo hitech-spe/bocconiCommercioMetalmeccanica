@@ -211,6 +211,24 @@
     "ERROR_MATCH": "Passwords do not match",
     "ERROR_REQUIRED_FIELDS": "First name and last name are required",
     "ERROR_GENERIC": "An error occurred. Please try again.",
-    "SUCCESS_REGISTER": "Account created successfully! You can now login."
-  }
-}
+    "SUCCESS_REGISTER": "Account created successfully! You can now log in."
+    },
+    "SEO": {
+    "HOME_TITLE": "BOCCONI COMMERCIO e METALMECCANICA SRL | Vehicle Roadside Assistance, Wash & Rental",
+    "HOME_DESC": "BOCCONI COMMERCIO e METALMECCANICA SRL in Massafra: leader in professional 24/7 roadside assistance, industrial wash, and work vehicle rentals.",
+    "ABOUT_TITLE": "About Us | Bocconi Srl",
+    "ABOUT_DESC": "Discover our story, mission, and the expertise of Bocconi Srl in automotive and industrial services in Massafra.",
+    "SERVICES_TITLE": "Our Services | Bocconi Srl",
+    "SERVICES_DESC": "Complete catalog of our services: fast roadside assistance, industrial vehicle wash, and work equipment rentals.",
+    "CONTACT_TITLE": "Contact Us | Bocconi Srl",
+    "CONTACT_DESC": "Get in touch with Bocconi Srl in Massafra to request quotes, assistance, or information about our services.",
+    "LOGIN_TITLE": "Login | Bocconi Srl",
+    "LOGIN_DESC": "Log in to Bocconi Srl client portal to manage your bookings and requests.",
+    "ANNOUNCEMENTS_TITLE": "Announcements Catalog | Bocconi Srl",
+    "ANNOUNCEMENTS_DESC": "Browse the commercial, industrial, and work equipment sales and rental listings available at Bocconi Srl.",
+    "PRIVACY_TITLE": "Privacy Policy | Bocconi Srl",
+    "PRIVACY_DESC": "Information on the processing of personal data (GDPR) and the user privacy of Bocconi Srl.",
+    "TERMS_TITLE": "Terms and Conditions | Bocconi Srl",
+    "TERMS_DESC": "General terms and conditions of use of the Bocconi Srl portal and regulation of AI quote simulations."
+    }
+    }

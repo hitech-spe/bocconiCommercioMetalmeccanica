@@ -1,9 +1,11 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from "../../services/auth.service";
 import { LoadingService } from "../../services/loading.service";
-import { TranslateModule } from "@ngx-translate/core";
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
+import { Title, Meta } from "@angular/platform-browser";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: 'app-login',
@@ -12,11 +14,15 @@ import { TranslateModule } from "@ngx-translate/core";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit, OnDestroy {
 
   private authService = inject(AuthService);
   private loadingService = inject(LoadingService);
   private router = inject(Router);
+  private translate = inject(TranslateService);
+  private titleService = inject(Title);
+  private metaService = inject(Meta);
+  private langSub?: Subscription;
 
   isLoginMode = true;
   email = '';
@@ -27,6 +33,26 @@ export class LoginComponent {
   error = '';
   success = '';
   isLoading = false;
+
+  ngOnInit(): void {
+    this.updateSEO();
+    this.langSub = this.translate.onLangChange.subscribe(() => {
+      this.updateSEO();
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.langSub) {
+      this.langSub.unsubscribe();
+    }
+  }
+
+  private updateSEO(): void {
+    this.translate.get(['SEO.LOGIN_TITLE', 'SEO.LOGIN_DESC']).subscribe(res => {
+      this.titleService.setTitle(res['SEO.LOGIN_TITLE']);
+      this.metaService.updateTag({ name: 'description', content: res['SEO.LOGIN_DESC'] });
+    });
+  }
 
   toggleMode() {
     this.isLoginMode = !this.isLoginMode;

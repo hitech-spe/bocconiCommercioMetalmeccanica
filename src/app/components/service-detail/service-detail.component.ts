@@ -3,6 +3,7 @@ import {ActivatedRoute, RouterLink} from '@angular/router';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import {Location} from "@angular/common";
+import {Title, Meta} from "@angular/platform-browser";
 
 interface Service {
   id: string;
@@ -107,6 +108,8 @@ export class ServiceDetailComponent implements OnInit, OnDestroy {
   private route = inject(ActivatedRoute);
   private location = inject(Location);
   private translate = inject(TranslateService);
+  private titleService = inject(Title);
+  private metaService = inject(Meta);
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -130,7 +133,36 @@ export class ServiceDetailComponent implements OnInit, OnDestroy {
     const rawService = this.services.find(s => s.id === id);
     if (rawService) {
       this.service = this.localizeService(rawService);
+      this.updateSEO(this.service);
     }
+  }
+
+  private updateSEO(service: Service): void {
+    const pageTitle = `${service.title} | Bocconi Srl`;
+    this.titleService.setTitle(pageTitle);
+    this.metaService.updateTag({ name: 'description', content: service.description });
+
+    // Open Graph Social Tags
+    this.metaService.updateTag({ property: 'og:title', content: pageTitle });
+    this.metaService.updateTag({ property: 'og:description', content: service.description });
+
+    let imageFilename = 'aziendaBocconi.jpeg';
+    if (service.id === 'soccorso-stradale') {
+      imageFilename = 'soccorsoStradale.jpeg';
+    } else if (service.id === 'lavaggio') {
+      imageFilename = 'lavaggio.jpeg';
+    } else if (service.id === 'noleggio') {
+      imageFilename = 'noleggio.jpeg';
+    }
+
+    try {
+      const origin = window.location.origin;
+      this.metaService.updateTag({ property: 'og:image', content: `${origin}/assets/images/${imageFilename}` });
+    } catch (e) {
+      // Fallback in case window is not defined (SSR or similar)
+      this.metaService.updateTag({ property: 'og:image', content: `assets/images/${imageFilename}` });
+    }
+    this.metaService.updateTag({ property: 'og:type', content: 'website' });
   }
 
   private localizeService(service: Service): Service {

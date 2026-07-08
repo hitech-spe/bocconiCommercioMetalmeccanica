@@ -1,7 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { RouterLink } from '@angular/router';
+import { Title, Meta } from '@angular/platform-browser';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-privacy',
@@ -10,10 +12,33 @@ import { RouterLink } from '@angular/router';
   templateUrl: './privacy.component.html',
   styleUrls: ['./privacy.component.scss']
 })
-export class PrivacyComponent {
+export class PrivacyComponent implements OnInit, OnDestroy {
   private translate = inject(TranslateService);
+  private titleService = inject(Title);
+  private metaService = inject(Meta);
+  private langSub?: Subscription;
 
   get currentLang(): string {
     return this.translate.currentLang || 'it';
+  }
+
+  ngOnInit(): void {
+    this.updateSEO();
+    this.langSub = this.translate.onLangChange.subscribe(() => {
+      this.updateSEO();
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.langSub) {
+      this.langSub.unsubscribe();
+    }
+  }
+
+  private updateSEO(): void {
+    this.translate.get(['SEO.PRIVACY_TITLE', 'SEO.PRIVACY_DESC']).subscribe(res => {
+      this.titleService.setTitle(res['SEO.PRIVACY_TITLE']);
+      this.metaService.updateTag({ name: 'description', content: res['SEO.PRIVACY_DESC'] });
+    });
   }
 }

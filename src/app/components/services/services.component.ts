@@ -1,7 +1,9 @@
-import { Component, HostListener, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
-import {TranslateModule} from "@ngx-translate/core";
+import { Component, HostListener, ElementRef, AfterViewInit, OnDestroy, inject, OnInit } from '@angular/core';
+import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {RouterLink, RouterOutlet} from "@angular/router";
 import {NgOptimizedImage} from "@angular/common";
+import {Title, Meta} from "@angular/platform-browser";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-services',
@@ -15,10 +17,28 @@ import {NgOptimizedImage} from "@angular/common";
     ],
   standalone: true
 })
-export class ServicesComponent implements AfterViewInit, OnDestroy {
+export class ServicesComponent implements AfterViewInit, OnInit, OnDestroy {
+  private translate = inject(TranslateService);
+  private titleService = inject(Title);
+  private metaService = inject(Meta);
+  private langSub?: Subscription;
   private observer?: IntersectionObserver;
 
   constructor(private el: ElementRef) {}
+
+  ngOnInit(): void {
+    this.updateSEO();
+    this.langSub = this.translate.onLangChange.subscribe(() => {
+      this.updateSEO();
+    });
+  }
+
+  private updateSEO(): void {
+    this.translate.get(['SEO.SERVICES_TITLE', 'SEO.SERVICES_DESC']).subscribe(res => {
+      this.titleService.setTitle(res['SEO.SERVICES_TITLE']);
+      this.metaService.updateTag({ name: 'description', content: res['SEO.SERVICES_DESC'] });
+    });
+  }
 
   ngAfterViewInit(): void {
     // Usiamo setTimeout per assicurarci che il DOM sia completamente renderizzato

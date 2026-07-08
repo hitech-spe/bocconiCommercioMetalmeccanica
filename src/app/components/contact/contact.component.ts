@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import emailjs, { type EmailJSResponseStatus } from '@emailjs/browser';
-import {TranslateModule} from "@ngx-translate/core";
+import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {FormsModule} from "@angular/forms";
 import {NgClass} from "@angular/common";
+import {Title, Meta} from "@angular/platform-browser";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-contact',
@@ -15,7 +17,12 @@ import {NgClass} from "@angular/common";
   ],
   standalone: true
 })
-export class ContactComponent {
+export class ContactComponent implements OnInit, OnDestroy {
+  private translate = inject(TranslateService);
+  private titleService = inject(Title);
+  private metaService = inject(Meta);
+  private langSub?: Subscription;
+
   formData = {
     name: '',
     email: '',
@@ -25,6 +32,26 @@ export class ContactComponent {
 
   isSending = false;
   submitStatus: 'success' | 'error' | null = null;
+
+  ngOnInit(): void {
+    this.updateSEO();
+    this.langSub = this.translate.onLangChange.subscribe(() => {
+      this.updateSEO();
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.langSub) {
+      this.langSub.unsubscribe();
+    }
+  }
+
+  private updateSEO(): void {
+    this.translate.get(['SEO.CONTACT_TITLE', 'SEO.CONTACT_DESC']).subscribe(res => {
+      this.titleService.setTitle(res['SEO.CONTACT_TITLE']);
+      this.metaService.updateTag({ name: 'description', content: res['SEO.CONTACT_DESC'] });
+    });
+  }
 
   onSubmit() {
     if (this.isSending) return;

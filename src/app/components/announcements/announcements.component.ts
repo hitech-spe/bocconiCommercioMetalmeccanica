@@ -1,11 +1,13 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnInit, OnDestroy} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {FirestoreService} from '../../services/firestore.service';
 import {Announcement} from '../../models/announcement.model';
 import {AuthService} from "../../services/auth.service";
 import {LoadingService} from "../../services/loading.service";
+import {TranslateService} from "@ngx-translate/core";
+import {Title, Meta} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-announcements',
@@ -14,12 +16,16 @@ import {LoadingService} from "../../services/loading.service";
     standalone: true,
     imports: [CommonModule, ReactiveFormsModule]
 })
-export class AnnouncementsComponent {
+export class AnnouncementsComponent implements OnInit, OnDestroy {
     private authService = inject(AuthService);
     user$ = this.authService.user$;
     private firestoreService = inject(FirestoreService);
     private fb = inject(FormBuilder);
     private loadingService = inject(LoadingService);
+    private translate = inject(TranslateService);
+    private titleService = inject(Title);
+    private metaService = inject(Meta);
+    private langSub?: Subscription;
 
     announcements$: Observable<Announcement[]>;
     announcementForm: FormGroup;
@@ -45,6 +51,26 @@ export class AnnouncementsComponent {
             description: ['', [Validators.required, Validators.maxLength(240)]],
         });
         this.loadingService.hide()
+    }
+
+    ngOnInit(): void {
+        this.updateSEO();
+        this.langSub = this.translate.onLangChange.subscribe(() => {
+            this.updateSEO();
+        });
+    }
+
+    ngOnDestroy(): void {
+        if (this.langSub) {
+            this.langSub.unsubscribe();
+        }
+    }
+
+    private updateSEO(): void {
+        this.translate.get(['SEO.ANNOUNCEMENTS_TITLE', 'SEO.ANNOUNCEMENTS_DESC']).subscribe(res => {
+            this.titleService.setTitle(res['SEO.ANNOUNCEMENTS_TITLE']);
+            this.metaService.updateTag({ name: 'description', content: res['SEO.ANNOUNCEMENTS_DESC'] });
+        });
     }
 
     openModal(): void {
