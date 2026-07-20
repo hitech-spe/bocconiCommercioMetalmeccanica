@@ -1,8 +1,8 @@
 import { Component, AfterViewInit, ElementRef, OnDestroy, inject, OnInit } from '@angular/core';
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
-import {RouterLink} from "@angular/router";
-import {Title, Meta} from "@angular/platform-browser";
-import {Subscription} from "rxjs";
+import { RouterLink } from "@angular/router";
+import { SeoService } from "../../services/seo.service";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: 'app-about',
@@ -16,8 +16,7 @@ import {Subscription} from "rxjs";
 })
 export class AboutComponent implements AfterViewInit, OnInit, OnDestroy {
   private translate = inject(TranslateService);
-  private titleService = inject(Title);
-  private metaService = inject(Meta);
+  private seoService = inject(SeoService);
   private langSub?: Subscription;
   private observer: IntersectionObserver | null = null;
 
@@ -33,8 +32,11 @@ export class AboutComponent implements AfterViewInit, OnInit, OnDestroy {
 
   private updateSEO(): void {
     this.translate.get(['SEO.ABOUT_TITLE', 'SEO.ABOUT_DESC']).subscribe(res => {
-      this.titleService.setTitle(res['SEO.ABOUT_TITLE']);
-      this.metaService.updateTag({ name: 'description', content: res['SEO.ABOUT_DESC'] });
+      this.seoService.generateTags({
+        title: res['SEO.ABOUT_TITLE'],
+        description: res['SEO.ABOUT_DESC'],
+        url: '/about'
+      });
     });
   }
 
@@ -67,6 +69,9 @@ export class AboutComponent implements AfterViewInit, OnInit, OnDestroy {
 
   ngOnDestroy() {
     // Pulizia automatica quando si cambia pagina
+    if (this.langSub) {
+      this.langSub.unsubscribe();
+    }
     if (this.observer) {
       this.observer.disconnect();
     }

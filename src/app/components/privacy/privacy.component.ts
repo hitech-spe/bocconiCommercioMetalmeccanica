@@ -2,7 +2,7 @@ import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { RouterLink } from '@angular/router';
-import { Title, Meta } from '@angular/platform-browser';
+import { SeoService } from '../../services/seo.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -14,8 +14,7 @@ import { Subscription } from 'rxjs';
 })
 export class PrivacyComponent implements OnInit, OnDestroy {
   private translate = inject(TranslateService);
-  private titleService = inject(Title);
-  private metaService = inject(Meta);
+  private seoService = inject(SeoService);
   private langSub?: Subscription;
 
   get currentLang(): string {
@@ -37,8 +36,11 @@ export class PrivacyComponent implements OnInit, OnDestroy {
 
   private updateSEO(): void {
     this.translate.get(['SEO.PRIVACY_TITLE', 'SEO.PRIVACY_DESC']).subscribe(res => {
-      this.titleService.setTitle(res['SEO.PRIVACY_TITLE']);
-      this.metaService.updateTag({ name: 'description', content: res['SEO.PRIVACY_DESC'] });
+      this.seoService.generateTags({
+        title: res['SEO.PRIVACY_TITLE'],
+        description: res['SEO.PRIVACY_DESC'],
+        url: '/privacy'
+      });
     });
   }
 }

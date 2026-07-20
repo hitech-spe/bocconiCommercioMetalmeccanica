@@ -7,7 +7,7 @@ import {Announcement} from '../../models/announcement.model';
 import {AuthService} from "../../services/auth.service";
 import {LoadingService} from "../../services/loading.service";
 import {TranslateService} from "@ngx-translate/core";
-import {Title, Meta} from "@angular/platform-browser";
+import {SeoService} from "../../services/seo.service";
 
 @Component({
     selector: 'app-announcements',
@@ -23,8 +23,7 @@ export class AnnouncementsComponent implements OnInit, OnDestroy {
     private fb = inject(FormBuilder);
     private loadingService = inject(LoadingService);
     private translate = inject(TranslateService);
-    private titleService = inject(Title);
-    private metaService = inject(Meta);
+    private seoService = inject(SeoService);
     private langSub?: Subscription;
 
     announcements$: Observable<Announcement[]>;
@@ -68,8 +67,11 @@ export class AnnouncementsComponent implements OnInit, OnDestroy {
 
     private updateSEO(): void {
         this.translate.get(['SEO.ANNOUNCEMENTS_TITLE', 'SEO.ANNOUNCEMENTS_DESC']).subscribe(res => {
-            this.titleService.setTitle(res['SEO.ANNOUNCEMENTS_TITLE']);
-            this.metaService.updateTag({ name: 'description', content: res['SEO.ANNOUNCEMENTS_DESC'] });
+            this.seoService.generateTags({
+                title: res['SEO.ANNOUNCEMENTS_TITLE'],
+                description: res['SEO.ANNOUNCEMENTS_DESC'],
+                url: '/annunci'
+            });
         });
     }
 

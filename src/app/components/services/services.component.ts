@@ -1,26 +1,25 @@
-import { Component, HostListener, ElementRef, AfterViewInit, OnDestroy, inject, OnInit } from '@angular/core';
-import {TranslateModule, TranslateService} from "@ngx-translate/core";
-import {RouterLink, RouterOutlet} from "@angular/router";
-import {NgOptimizedImage} from "@angular/common";
-import {Title, Meta} from "@angular/platform-browser";
-import {Subscription} from "rxjs";
+import { Component, ElementRef, AfterViewInit, OnDestroy, inject, OnInit } from '@angular/core';
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
+import { RouterLink, RouterOutlet } from "@angular/router";
+import { NgOptimizedImage } from "@angular/common";
+import { SeoService } from "../../services/seo.service";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: 'app-services',
   templateUrl: './services.component.html',
   styleUrls: ['./services.component.scss'],
-    imports: [
-        TranslateModule,
-        RouterLink,
-        NgOptimizedImage,
-        RouterOutlet
-    ],
+  imports: [
+    TranslateModule,
+    RouterLink,
+    NgOptimizedImage,
+    RouterOutlet
+  ],
   standalone: true
 })
 export class ServicesComponent implements AfterViewInit, OnInit, OnDestroy {
   private translate = inject(TranslateService);
-  private titleService = inject(Title);
-  private metaService = inject(Meta);
+  private seoService = inject(SeoService);
   private langSub?: Subscription;
   private observer?: IntersectionObserver;
 
@@ -35,8 +34,11 @@ export class ServicesComponent implements AfterViewInit, OnInit, OnDestroy {
 
   private updateSEO(): void {
     this.translate.get(['SEO.SERVICES_TITLE', 'SEO.SERVICES_DESC']).subscribe(res => {
-      this.titleService.setTitle(res['SEO.SERVICES_TITLE']);
-      this.metaService.updateTag({ name: 'description', content: res['SEO.SERVICES_DESC'] });
+      this.seoService.generateTags({
+        title: res['SEO.SERVICES_TITLE'],
+        description: res['SEO.SERVICES_DESC'],
+        url: '/services'
+      });
     });
   }
 
@@ -75,6 +77,9 @@ export class ServicesComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    if (this.langSub) {
+      this.langSub.unsubscribe();
+    }
     // Puliamo l'osservatore quando il componente viene distrutto
     this.observer?.disconnect();
   }

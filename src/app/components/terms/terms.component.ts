@@ -2,7 +2,7 @@ import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { RouterLink } from '@angular/router';
-import { Title, Meta } from '@angular/platform-browser';
+import { SeoService } from '../../services/seo.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -14,8 +14,7 @@ import { Subscription } from 'rxjs';
 })
 export class TermsComponent implements OnInit, OnDestroy {
   private translate = inject(TranslateService);
-  private titleService = inject(Title);
-  private metaService = inject(Meta);
+  private seoService = inject(SeoService);
   private langSub?: Subscription;
 
   get currentLang(): string {
@@ -37,8 +36,11 @@ export class TermsComponent implements OnInit, OnDestroy {
 
   private updateSEO(): void {
     this.translate.get(['SEO.TERMS_TITLE', 'SEO.TERMS_DESC']).subscribe(res => {
-      this.titleService.setTitle(res['SEO.TERMS_TITLE']);
-      this.metaService.updateTag({ name: 'description', content: res['SEO.TERMS_DESC'] });
+      this.seoService.generateTags({
+        title: res['SEO.TERMS_TITLE'],
+        description: res['SEO.TERMS_DESC'],
+        url: '/termini'
+      });
     });
   }
 }

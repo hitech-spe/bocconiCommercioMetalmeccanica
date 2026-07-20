@@ -4,7 +4,7 @@ import {RouterOutlet} from "@angular/router";
 import {AboutComponent} from "../about/about.component";
 import {ServicesComponent} from "../services/services.component";
 import {ContactComponent} from "../contact/contact.component";
-import {Title, Meta} from "@angular/platform-browser";
+import {SeoService} from "../../services/seo.service";
 import {Subscription} from "rxjs";
 
 @Component({
@@ -22,8 +22,7 @@ import {Subscription} from "rxjs";
 })
 export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
   private translate = inject(TranslateService);
-  private titleService = inject(Title);
-  private metaService = inject(Meta);
+  private seoService = inject(SeoService);
   private langSub?: Subscription;
   private host = inject(ElementRef<HTMLElement>);
   private observer?: IntersectionObserver;
@@ -38,8 +37,11 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
 
   private updateSEO(): void {
     this.translate.get(['SEO.HOME_TITLE', 'SEO.HOME_DESC']).subscribe(res => {
-      this.titleService.setTitle(res['SEO.HOME_TITLE']);
-      this.metaService.updateTag({ name: 'description', content: res['SEO.HOME_DESC'] });
+      this.seoService.generateTags({
+        title: res['SEO.HOME_TITLE'],
+        description: res['SEO.HOME_DESC'],
+        url: '/home'
+      });
     });
   }
 

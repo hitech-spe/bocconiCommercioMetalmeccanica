@@ -3,7 +3,7 @@ import emailjs, { type EmailJSResponseStatus } from '@emailjs/browser';
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {FormsModule} from "@angular/forms";
 import {NgClass} from "@angular/common";
-import {Title, Meta} from "@angular/platform-browser";
+import {SeoService} from "../../services/seo.service";
 import {Subscription} from "rxjs";
 
 @Component({
@@ -19,8 +19,7 @@ import {Subscription} from "rxjs";
 })
 export class ContactComponent implements OnInit, OnDestroy {
   private translate = inject(TranslateService);
-  private titleService = inject(Title);
-  private metaService = inject(Meta);
+  private seoService = inject(SeoService);
   private langSub?: Subscription;
 
   formData = {
@@ -48,8 +47,11 @@ export class ContactComponent implements OnInit, OnDestroy {
 
   private updateSEO(): void {
     this.translate.get(['SEO.CONTACT_TITLE', 'SEO.CONTACT_DESC']).subscribe(res => {
-      this.titleService.setTitle(res['SEO.CONTACT_TITLE']);
-      this.metaService.updateTag({ name: 'description', content: res['SEO.CONTACT_DESC'] });
+      this.seoService.generateTags({
+        title: res['SEO.CONTACT_TITLE'],
+        description: res['SEO.CONTACT_DESC'],
+        url: '/contact'
+      });
     });
   }
 

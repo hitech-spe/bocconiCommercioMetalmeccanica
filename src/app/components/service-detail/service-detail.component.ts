@@ -3,7 +3,7 @@ import {ActivatedRoute, RouterLink} from '@angular/router';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import {Location} from "@angular/common";
-import {Title, Meta} from "@angular/platform-browser";
+import {SeoService} from "../../services/seo.service";
 
 interface Service {
   id: string;
@@ -108,8 +108,7 @@ export class ServiceDetailComponent implements OnInit, OnDestroy {
   private route = inject(ActivatedRoute);
   private location = inject(Location);
   private translate = inject(TranslateService);
-  private titleService = inject(Title);
-  private metaService = inject(Meta);
+  private seoService = inject(SeoService);
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -139,12 +138,6 @@ export class ServiceDetailComponent implements OnInit, OnDestroy {
 
   private updateSEO(service: Service): void {
     const pageTitle = `${service.title} | Bocconi Srl`;
-    this.titleService.setTitle(pageTitle);
-    this.metaService.updateTag({ name: 'description', content: service.description });
-
-    // Open Graph Social Tags
-    this.metaService.updateTag({ property: 'og:title', content: pageTitle });
-    this.metaService.updateTag({ property: 'og:description', content: service.description });
 
     let imageFilename = 'aziendaBocconi.jpeg';
     if (service.id === 'soccorso-stradale') {
@@ -155,14 +148,12 @@ export class ServiceDetailComponent implements OnInit, OnDestroy {
       imageFilename = 'noleggio.jpeg';
     }
 
-    try {
-      const origin = window.location.origin;
-      this.metaService.updateTag({ property: 'og:image', content: `${origin}/assets/images/${imageFilename}` });
-    } catch (e) {
-      // Fallback in case window is not defined (SSR or similar)
-      this.metaService.updateTag({ property: 'og:image', content: `assets/images/${imageFilename}` });
-    }
-    this.metaService.updateTag({ property: 'og:type', content: 'website' });
+    this.seoService.generateTags({
+      title: pageTitle,
+      description: service.description,
+      image: `assets/images/${imageFilename}`,
+      url: `/services/${service.id}`
+    });
   }
 
   private localizeService(service: Service): Service {

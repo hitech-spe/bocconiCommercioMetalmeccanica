@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from "../../services/auth.service";
 import { LoadingService } from "../../services/loading.service";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
-import { Title, Meta } from "@angular/platform-browser";
+import { SeoService } from "../../services/seo.service";
 import { Subscription } from "rxjs";
 
 @Component({
@@ -20,8 +20,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   private loadingService = inject(LoadingService);
   private router = inject(Router);
   private translate = inject(TranslateService);
-  private titleService = inject(Title);
-  private metaService = inject(Meta);
+  private seoService = inject(SeoService);
   private langSub?: Subscription;
 
   isLoginMode = true;
@@ -49,8 +48,11 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   private updateSEO(): void {
     this.translate.get(['SEO.LOGIN_TITLE', 'SEO.LOGIN_DESC']).subscribe(res => {
-      this.titleService.setTitle(res['SEO.LOGIN_TITLE']);
-      this.metaService.updateTag({ name: 'description', content: res['SEO.LOGIN_DESC'] });
+      this.seoService.generateTags({
+        title: res['SEO.LOGIN_TITLE'],
+        description: res['SEO.LOGIN_DESC'],
+        url: '/login'
+      });
     });
   }
 

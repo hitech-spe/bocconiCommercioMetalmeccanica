@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /login
 
-Sitemap: https://bocconimecccomm.netlify.app/sitemap.xml
+Sitemap: https://bocconicommet.com/sitemap.xml
