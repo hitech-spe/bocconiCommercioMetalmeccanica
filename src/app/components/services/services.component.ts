@@ -33,10 +33,11 @@ export class ServicesComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   private updateSEO(): void {
-    this.translate.get(['SEO.SERVICES_TITLE', 'SEO.SERVICES_DESC']).subscribe(res => {
+    this.translate.get(['SEO.SERVICES_TITLE', 'SEO.SERVICES_DESC', 'SEO.SERVICES_KEYWORDS']).subscribe(res => {
       this.seoService.generateTags({
         title: res['SEO.SERVICES_TITLE'],
         description: res['SEO.SERVICES_DESC'],
+        keywords: res['SEO.SERVICES_KEYWORDS'],
         url: '/services'
       });
     });

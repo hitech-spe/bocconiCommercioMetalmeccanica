@@ -46,10 +46,11 @@ export class ContactComponent implements OnInit, OnDestroy {
   }
 
   private updateSEO(): void {
-    this.translate.get(['SEO.CONTACT_TITLE', 'SEO.CONTACT_DESC']).subscribe(res => {
+    this.translate.get(['SEO.CONTACT_TITLE', 'SEO.CONTACT_DESC', 'SEO.CONTACT_KEYWORDS']).subscribe(res => {
       this.seoService.generateTags({
         title: res['SEO.CONTACT_TITLE'],
         description: res['SEO.CONTACT_DESC'],
+        keywords: res['SEO.CONTACT_KEYWORDS'],
         url: '/contact'
       });
     });

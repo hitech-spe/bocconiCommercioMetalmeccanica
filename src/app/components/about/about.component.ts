@@ -31,10 +31,11 @@ export class AboutComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   private updateSEO(): void {
-    this.translate.get(['SEO.ABOUT_TITLE', 'SEO.ABOUT_DESC']).subscribe(res => {
+    this.translate.get(['SEO.ABOUT_TITLE', 'SEO.ABOUT_DESC', 'SEO.ABOUT_KEYWORDS']).subscribe(res => {
       this.seoService.generateTags({
         title: res['SEO.ABOUT_TITLE'],
         description: res['SEO.ABOUT_DESC'],
+        keywords: res['SEO.ABOUT_KEYWORDS'],
         url: '/about'
       });
     });

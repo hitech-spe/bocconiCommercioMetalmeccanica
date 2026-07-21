@@ -7,6 +7,7 @@ export interface SeoConfig {
   description: string;
   image?: string;
   url?: string;
+  keywords?: string;
 }
 
 @Injectable({
@@ -57,6 +58,9 @@ export class SeoService {
     // 2. Standard Meta Tags
     this.metaService.updateTag({ name: 'description', content: description });
     this.metaService.updateTag({ name: 'robots', content: 'index, follow' });
+    
+    const keywords = config.keywords || 'soccorso, massafra, vendita auto, furgoni, noleggio auto, bocconi srl, soccorso stradale, lavaggio industriale, noleggio furgoni, taranto, puglia';
+    this.metaService.updateTag({ name: 'keywords', content: keywords });
 
     // 3. Open Graph (Facebook / LinkedIn)
     this.metaService.updateTag({ property: 'og:title', content: title });

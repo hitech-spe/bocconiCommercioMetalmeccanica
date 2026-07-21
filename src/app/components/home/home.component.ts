@@ -36,10 +36,11 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   private updateSEO(): void {
-    this.translate.get(['SEO.HOME_TITLE', 'SEO.HOME_DESC']).subscribe(res => {
+    this.translate.get(['SEO.HOME_TITLE', 'SEO.HOME_DESC', 'SEO.HOME_KEYWORDS']).subscribe(res => {
       this.seoService.generateTags({
         title: res['SEO.HOME_TITLE'],
         description: res['SEO.HOME_DESC'],
+        keywords: res['SEO.HOME_KEYWORDS'],
         url: '/home'
       });
     });

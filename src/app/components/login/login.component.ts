@@ -47,10 +47,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   private updateSEO(): void {
-    this.translate.get(['SEO.LOGIN_TITLE', 'SEO.LOGIN_DESC']).subscribe(res => {
+    this.translate.get(['SEO.LOGIN_TITLE', 'SEO.LOGIN_DESC', 'SEO.LOGIN_KEYWORDS']).subscribe(res => {
       this.seoService.generateTags({
         title: res['SEO.LOGIN_TITLE'],
         description: res['SEO.LOGIN_DESC'],
+        keywords: res['SEO.LOGIN_KEYWORDS'],
         url: '/login'
       });
     });
