@@ -32,13 +32,28 @@ describe('SeoService', () => {
     service.generateTags({
       title: 'Test Title',
       description: 'Test Description',
-      url: '/test-route'
+      url: '/test-route',
+      keywords: 'keyword1, keyword2'
     });
 
     expect(titleSpy.setTitle).toHaveBeenCalledWith('Test Title');
     expect(metaSpy.updateTag).toHaveBeenCalledWith({ name: 'description', content: 'Test Description' });
     expect(metaSpy.updateTag).toHaveBeenCalledWith({ name: 'robots', content: 'index, follow' });
+    expect(metaSpy.updateTag).toHaveBeenCalledWith({ name: 'keywords', content: 'keyword1, keyword2' });
     expect(metaSpy.updateTag).toHaveBeenCalledWith({ property: 'og:title', content: 'Test Title' });
     expect(metaSpy.updateTag).toHaveBeenCalledWith({ property: 'og:url', content: 'https://bocconicommet.com/test-route' });
+  });
+
+  it('should fallback to default keywords if none provided', () => {
+    service.generateTags({
+      title: 'Test Title',
+      description: 'Test Description',
+      url: '/test-route'
+    });
+
+    expect(metaSpy.updateTag).toHaveBeenCalledWith({ 
+      name: 'keywords', 
+      content: 'soccorso, massafra, vendita auto, furgoni, noleggio auto, bocconi srl, soccorso stradale, lavaggio industriale, noleggio furgoni, taranto, puglia' 
+    });
   });
 });

@@ -35,10 +35,11 @@ export class TermsComponent implements OnInit, OnDestroy {
   }
 
   private updateSEO(): void {
-    this.translate.get(['SEO.TERMS_TITLE', 'SEO.TERMS_DESC']).subscribe(res => {
+    this.translate.get(['SEO.TERMS_TITLE', 'SEO.TERMS_DESC', 'SEO.TERMS_KEYWORDS']).subscribe(res => {
       this.seoService.generateTags({
         title: res['SEO.TERMS_TITLE'],
         description: res['SEO.TERMS_DESC'],
+        keywords: res['SEO.TERMS_KEYWORDS'],
         url: '/termini'
       });
     });

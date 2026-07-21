@@ -66,10 +66,11 @@ export class AnnouncementsComponent implements OnInit, OnDestroy {
     }
 
     private updateSEO(): void {
-        this.translate.get(['SEO.ANNOUNCEMENTS_TITLE', 'SEO.ANNOUNCEMENTS_DESC']).subscribe(res => {
+        this.translate.get(['SEO.ANNOUNCEMENTS_TITLE', 'SEO.ANNOUNCEMENTS_DESC', 'SEO.ANNOUNCEMENTS_KEYWORDS']).subscribe(res => {
             this.seoService.generateTags({
                 title: res['SEO.ANNOUNCEMENTS_TITLE'],
                 description: res['SEO.ANNOUNCEMENTS_DESC'],
+                keywords: res['SEO.ANNOUNCEMENTS_KEYWORDS'],
                 url: '/annunci'
             });
         });

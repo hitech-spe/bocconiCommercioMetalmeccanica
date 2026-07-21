@@ -12,12 +12,14 @@ interface Service {
   description: string;
   features: string[];
   fullContent: string;
+  keywords: string;
   translations?: {
     [locale: string]: {
       title: string;
       description: string;
       features: string[];
       fullContent: string;
+      keywords?: string;
     }
   };
 }
@@ -44,12 +46,14 @@ export class ServiceDetailComponent implements OnInit, OnDestroy {
       description: 'Intervento rapido per soccorso stradale di auto, furgoni e veicoli industriali.',
       features: ['Assistenza 24/7', 'Recupero veicoli incidentati', 'Trasporto in officina', 'Intervento rapido'],
       fullContent: 'Il servizio di soccorso stradale BOCCONI COMMERCIO e METALMECCANICA SRL garantisce un intervento tempestivo e sicuro per il recupero di veicoli in avaria o incidentati.',
+      keywords: 'soccorso, massafra, soccorso stradale, carroattrezzi massafra, assistenza stradale 24/7, furgoni, veicoli industriali',
       translations: {
         en: {
           title: 'Roadside Assistance',
           description: 'Fast response for roadside assistance of cars, vans, and industrial vehicles.',
           features: ['24/7 Assistance', 'Recovery of crashed vehicles', 'Transport to workshop', 'Fast response'],
-          fullContent: 'BOCCONI COMMERCIO e METALMECCANICA SRL roadside assistance service ensures a timely and safe response for the recovery of broken down or crashed vehicles.'
+          fullContent: 'BOCCONI COMMERCIO e METALMECCANICA SRL roadside assistance service ensures a timely and safe response for the recovery of broken down or crashed vehicles.',
+          keywords: 'roadside assistance, massafra, towing massafra, 24/7 roadside assistance, vans, industrial vehicles, soccorso stradale'
         }
       }
     },
@@ -60,12 +64,14 @@ export class ServiceDetailComponent implements OnInit, OnDestroy {
       description: 'Servizio di lavaggio per auto e veicoli industriali.',
       features: ['Lavaggio esterni', 'Pulizia interni', 'Sanificazione', 'Lavaggio per mezzi pesanti'],
       fullContent: 'Offriamo un servizio completo di lavaggio e sanificazione per ogni tipologia di veicolo, dalle auto ai mezzi industriali.',
+      keywords: 'lavaggio auto, lavaggio industriale, massafra, igienizzazione interni, pulizia furgoni, sanificazione auto, lavaggio mezzi pesanti',
       translations: {
         en: {
           title: 'Industrial and Car Wash',
           description: 'Washing service for cars and industrial vehicles.',
           features: ['Exterior washing', 'Interior cleaning', 'Sanitization', 'Heavy vehicle washing'],
-          fullContent: 'We offer a complete washing and sanitization service for all types of vehicles, from cars to industrial vehicles.'
+          fullContent: 'We offer a complete washing and sanitization service for all types of vehicles, from cars to industrial vehicles.',
+          keywords: 'car wash, industrial wash, massafra, interior cleaning, van cleaning, sanitization, heavy vehicle washing, lavaggio'
         }
       }
     },
@@ -85,6 +91,7 @@ export class ServiceDetailComponent implements OnInit, OnDestroy {
         'Noleggio Lungo Termine (12-60 mesi): Tutto incluso (bollo, assicurazione, manutenzione, gomme) a canone fisso.'
       ],
       fullContent: 'Ampia flotta di mezzi recenti e sicuri per soddisfare le esigenze di privati e aziende. Che ti serva una piccola auto per la città, un furgone per il tuo lavoro o mezzi di sollevamento e macchine operatrici, offriamo formule dal breve al lungo termine con pacchetti tutto incluso per eliminare ogni pensiero.',
+      keywords: 'noleggio auto, noleggio furgoni, massafra, vendita auto, noleggio furgoni 9 posti, noleggio gru, noleggio piattaforme aeree, noleggio escavatori, noleggio muletti',
       translations: {
         en: {
           title: 'Car, Van and Work Equipment Rental',
@@ -99,7 +106,8 @@ export class ServiceDetailComponent implements OnInit, OnDestroy {
             'Forklifts: Solutions for logistics and goods handling in the warehouse.',
             'Long Term Rental (12-60 months): All-inclusive (tax, insurance, maintenance, tires) at a fixed rate.'
           ],
-          fullContent: 'Large rental fleet of recent and safe vehicles to meet the needs of individuals and companies. Whether you need a small car for the city, a van for your work, or lifting equipment and operating machines, we offer short to long-term formulas with all-inclusive packages to eliminate all worries.'
+          fullContent: 'Large rental fleet of recent and safe vehicles to meet the needs of individuals and companies. Whether you need a small car for the city, a van for your work, or lifting equipment and operating machines, we offer short to long-term formulas with all-inclusive packages to eliminate all worries.',
+          keywords: 'car rental, van rental, massafra, car sales, 9-seater van rental, crane rental, aerial platform rental, excavator rental, forklift rental, noleggio auto'
         }
       }
     }
@@ -152,7 +160,8 @@ export class ServiceDetailComponent implements OnInit, OnDestroy {
       title: pageTitle,
       description: service.description,
       image: `assets/images/${imageFilename}`,
-      url: `/services/${service.id}`
+      url: `/services/${service.id}`,
+      keywords: service.keywords
     });
   }
 

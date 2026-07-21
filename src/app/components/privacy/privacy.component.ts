@@ -35,10 +35,11 @@ export class PrivacyComponent implements OnInit, OnDestroy {
   }
 
   private updateSEO(): void {
-    this.translate.get(['SEO.PRIVACY_TITLE', 'SEO.PRIVACY_DESC']).subscribe(res => {
+    this.translate.get(['SEO.PRIVACY_TITLE', 'SEO.PRIVACY_DESC', 'SEO.PRIVACY_KEYWORDS']).subscribe(res => {
       this.seoService.generateTags({
         title: res['SEO.PRIVACY_TITLE'],
         description: res['SEO.PRIVACY_DESC'],
+        keywords: res['SEO.PRIVACY_KEYWORDS'],
         url: '/privacy'
       });
     });
