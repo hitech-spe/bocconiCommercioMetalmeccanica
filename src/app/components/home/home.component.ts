@@ -41,7 +41,7 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
         title: res['SEO.HOME_TITLE'],
         description: res['SEO.HOME_DESC'],
         keywords: res['SEO.HOME_KEYWORDS'],
-        url: '/home'
+        url: '/'
       });
     });
   }

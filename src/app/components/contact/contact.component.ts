@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, OnDestroy } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy, Input } from '@angular/core';
 import emailjs, { type EmailJSResponseStatus } from '@emailjs/browser';
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {FormsModule} from "@angular/forms";
@@ -18,6 +18,7 @@ import {Subscription} from "rxjs";
   standalone: true
 })
 export class ContactComponent implements OnInit, OnDestroy {
+  @Input() isNested = false;
   private translate = inject(TranslateService);
   private seoService = inject(SeoService);
   private langSub?: Subscription;
@@ -46,6 +47,7 @@ export class ContactComponent implements OnInit, OnDestroy {
   }
 
   private updateSEO(): void {
+    if (this.isNested) return;
     this.translate.get(['SEO.CONTACT_TITLE', 'SEO.CONTACT_DESC', 'SEO.CONTACT_KEYWORDS']).subscribe(res => {
       this.seoService.generateTags({
         title: res['SEO.CONTACT_TITLE'],

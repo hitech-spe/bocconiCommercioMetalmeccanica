@@ -6,19 +6,19 @@
 ></button>
 
 <section id="home" class="home-section reveal-on-scroll is-visible">
-    <app-about></app-about>
+    <app-about [isNested]="true"></app-about>
 </section>
 
 
 <section id="services" class="home-section">
     <div class="section-container">
-        <app-services></app-services>
+        <app-services [isNested]="true"></app-services>
     </div>
 </section>
 
 <section id="contact" class="home-section reveal-on-scroll">
     <div class="section-container">
-        <app-contact></app-contact>
+        <app-contact [isNested]="true"></app-contact>
     </div>
 </section>
 

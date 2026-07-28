@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ElementRef, OnDestroy, inject, OnInit } from '@angular/core';
+import { Component, AfterViewInit, ElementRef, OnDestroy, inject, OnInit, Input } from '@angular/core';
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { RouterLink } from "@angular/router";
 import { SeoService } from "../../services/seo.service";
@@ -15,6 +15,7 @@ import { Subscription } from "rxjs";
   standalone: true
 })
 export class AboutComponent implements AfterViewInit, OnInit, OnDestroy {
+  @Input() isNested = false;
   private translate = inject(TranslateService);
   private seoService = inject(SeoService);
   private langSub?: Subscription;
@@ -31,6 +32,7 @@ export class AboutComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   private updateSEO(): void {
+    if (this.isNested) return;
     this.translate.get(['SEO.ABOUT_TITLE', 'SEO.ABOUT_DESC', 'SEO.ABOUT_KEYWORDS']).subscribe(res => {
       this.seoService.generateTags({
         title: res['SEO.ABOUT_TITLE'],
