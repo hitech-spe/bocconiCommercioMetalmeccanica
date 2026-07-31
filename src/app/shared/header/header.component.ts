@@ -2,7 +2,6 @@ import { Component, inject, HostListener } from '@angular/core';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {RouterLink, RouterLinkActive} from "@angular/router";
 import {AsyncPipe, NgOptimizedImage} from "@angular/common";
-import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-header',
@@ -12,8 +11,7 @@ import {AuthService} from "../../services/auth.service";
     TranslateModule,
     RouterLink,
     RouterLinkActive,
-    NgOptimizedImage,
-    AsyncPipe
+    NgOptimizedImage
   ],
   standalone: true
 })
@@ -21,9 +19,6 @@ export class HeaderComponent {
   isMenuOpen = false;
   currentLang: string;
 
-  private authService = inject(AuthService);
-
-  user$ = this.authService.user$;
 
   isUserMenuOpen = false;
 
@@ -42,7 +37,6 @@ export class HeaderComponent {
   }
 
   logout() {
-    this.authService.logout();
     this.closeMenu();
     this.isUserMenuOpen = false;
   }

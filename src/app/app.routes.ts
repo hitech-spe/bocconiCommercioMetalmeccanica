@@ -4,9 +4,6 @@ import {AboutComponent} from './components/about/about.component';
 import {ServicesComponent} from './components/services/services.component';
 import {ContactComponent} from './components/contact/contact.component';
 import {ServiceDetailComponent} from './components/service-detail/service-detail.component';
-import {LoginComponent} from "./components/login/login.component";
-import {authGuard} from "./guards/auth.guard";
-import {AnnouncementsComponent} from "./components/announcements/announcements.component";
 import {PrivacyComponent} from "./components/privacy/privacy.component";
 import {TermsComponent} from "./components/terms/terms.component";
 
@@ -28,8 +25,6 @@ export const routes: Routes = [
         ]
     },
     {path: 'contact', component: ContactComponent},
-    {path: 'login', component: LoginComponent},
-    {path: 'annunci', component: AnnouncementsComponent},
     {path: 'privacy', component: PrivacyComponent},
     {path: 'termini', component: TermsComponent},
     {path: 'terms', redirectTo: '/termini'},
